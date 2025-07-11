@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prosedur Perizinan Santri Asrama 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Animate.css for dynamic animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #e0f2fe, #cffafe, #f0fdfa, #e0f2fe);
+            background-size: 400% 400%;
+            animation: gradient-animation 25s ease infinite;
+        }
+        
+        @keyframes shine-effect {
+            0% { transform: translateX(-100%) skewX(-20deg); }
+            100% { transform: translateX(200%) skewX(-20deg); }
+        }
+        .card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+        .card .shine {
+            position: absolute;
+            top: 0; left: 0; width: 50%; height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+        .card:hover .shine {
+            opacity: 1;
+            animation: shine-effect 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-button {
+            transition: background-color 0.3s ease;
+            border-radius: 1.25rem;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), padding 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 1.5rem;
+        }
+        .accordion-button.active {
+            background-color: rgba(23, 162, 184, 0.1);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .accordion-button.active + .accordion-content {
+            max-height: 1500px; /* Increased max-height for content */
+            padding: 1rem 1.5rem 1.5rem;
+        }
+        .accordion-content-inner > .step {
+            animation: fadeIn 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .accordion-button .icon-container {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .accordion-button.active .icon-container {
+            transform: rotate(135deg);
+        }
+        
+        .btn {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-whatsapp { background-color: #14b8a6; }
+        .btn-whatsapp:hover { background-color: #0d9488; }
+        .btn-doc { background-color: #3b82f6; }
+        .btn-doc:hover { background-color: #2563eb; }
+
+        :focus-visible {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+            border-radius: 0.5rem;
+        }
+        .accordion-button:focus-visible {
+            border-radius: 1.25rem;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-5xl">
+
+        <!-- New Hero Section -->
+        <header class="mb-20 md:mb-28">
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <!-- Left Column: Text Content -->
+                <div class="text-center md:text-left animate__animated animate__fadeInLeft">
+                    <p class="text-base font-semibold text-teal-600 uppercase tracking-wider">Madrasah Mu'allimin Muhammadiyah Yogyakarta</p>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mt-2">
+                        Panduan Lengkap Perizinan Santri
+                    </h1>
+                    <p class="mt-6 text-lg text-slate-600 max-w-lg mx-auto md:mx-0">
+                        Semua informasi dan prosedur yang Bapak/Ibu butuhkan untuk mengajukan izin keluar asrama, cuti, atau keperluan lainnya.
+                    </p>
+                    <div class="mt-8 flex justify-center md:justify-start gap-4">
+                        <button id="scroll-to-procedures" class="btn bg-teal-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-teal-600">
+                            Lihat Prosedur
+                        </button>
+                    </div>
+                </div>
+                <!-- Right Column: Graphic -->
+                <div class="hidden md:block relative h-80 animate__animated animate__fadeInRight">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-teal-300 rounded-full opacity-50 animate__animated animate__pulse animate__infinite animate__slower"></div>
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-sky-300 rounded-full opacity-50 animate__animated animate__pulse animate__infinite animate__slower [animation-delay:1s]"></div>
+                    <div class="relative card h-full w-full p-6 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-7xl mb-4">🕌</div>
+                            <p class="font-bold text-slate-700 text-lg">Asrama 1 (Satu)</p>
+                            <p class="text-sm text-slate-500">Abu Bakar Ash - Shiddiq</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <section class="mb-16 md:mb-20" aria-labelledby="ketentuan-umum-heading">
+                <h2 id="ketentuan-umum-heading" class="text-xl sm:text-2xl font-bold mb-8 text-center text-slate-800 animate-on-scroll">📜 Ketentuan Umum</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="card p-6 animate-on-scroll">
+                        <div class="shine"></div>
+                        <div class="mx-auto mb-4 h-16 w-16 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-3xl" role="img" aria-label="Ikon Target">🎯</div>
+                        <h3 class="font-semibold text-lg mb-1 text-teal-800">Tujuan</h3>
+                        <p class="text-slate-600 text-sm">Menjadi acuan resmi demi kelancaran kegiatan.</p>
+                    </div>
+                    <div class="card p-6 animate-on-scroll">
+                        <div class="shine"></div>
+                        <div class="mx-auto mb-4 h-16 w-16 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-3xl" role="img" aria-label="Ikon Dokumen">📝</div>
+                        <h3 class="font-semibold text-lg mb-1 text-teal-800">Izin Resmi</h3>
+                        <p class="text-slate-600 text-sm">Santri wajib memiliki izin resmi sebelum keluar asrama.</p>
+                    </div>
+                    <div class="card p-6 animate-on-scroll">
+                        <div class="shine"></div>
+                        <div class="mx-auto mb-4 h-16 w-16 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-3xl" role="img" aria-label="Ikon Peringatan">⚠️</div>
+                        <h3 class="font-semibold text-lg mb-1 text-amber-800">Konsekuensi</h3>
+                        <p class="text-slate-600 text-sm">Pelanggaran akan dikenakan pembinaan sesuai aturan.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="hierarki-izin-heading">
+                <h2 id="hierarki-izin-heading" class="text-xl sm:text-2xl font-bold mb-8 text-center text-slate-800 animate-on-scroll">🗂️ Pilih Jenis Izin yang Anda Butuhkan</h2>
+                <div class="space-y-5" id="accordion-container">
+                    
+                    <!-- Accordion Item 1: Izin < 24 Jam -->
+                    <div class="card overflow-hidden animate-on-scroll">
+                        <button id="accordion-btn-1" class="accordion-button w-full text-left p-4 sm:p-6 flex justify-between items-center" aria-expanded="false" aria-controls="accordion-content-1">
+                            <span class="font-semibold text-base sm:text-lg flex items-center gap-4"><span class="text-2xl sm:text-3xl" role="img" aria-label="Ikon Matahari">☀️</span> Izin Kurang dari 24 Jam</span>
+                            <span class="icon-container text-teal-500"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img"><title>Buka/Tutup</title><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></span>
+                        </button>
+                        <div id="accordion-content-1" class="accordion-content" role="region" aria-labelledby="accordion-btn-1">
+                            <div class="accordion-content-inner space-y-8">
+                                <div class="step">
+                                    <h4 class="font-semibold text-blue-600 mb-4 text-base sm:text-lg">A. Izin Keluar (Kembali hari yang sama)</h4>
+                                    <p class="mb-4 text-slate-600 text-sm sm:text-base">Wali santri mengajukan izin via <strong>pesan singkat (WhatsApp)</strong> ke Musyrif Kelas.</p>
+                                    <div class="space-y-3">
+                                        <div class="bg-slate-50 p-3 rounded-lg flex items-center justify-between">
+                                            <div>
+                                                <p class="font-semibold text-slate-800">Ust. Andi Aqillah Fadia Haswat</p>
+                                                <p class="text-xs text-slate-500">Musyrif Kelas 2A</p>
+                                            </div>
+                                            <a href="https://wa.me/6285339213109" target="_blank" class="btn btn-whatsapp text-white font-bold py-2 px-3 rounded-full text-xs sm:text-sm">Hubungi</a>
+                                        </div>
+                                        <div class="bg-slate-50 p-3 rounded-lg flex items-center justify-between">
+                                            <div>
+                                                <p class="font-semibold text-slate-800">Ust. Abdullah</p>
+                                                <p class="text-xs text-slate-500">Musyrif Kelas 2B</p>
+                                            </div>
+                                            <a href="https://wa.me/62881025916368" target="_blank" class="btn btn-whatsapp text-white font-bold py-2 px-3 rounded-full text-xs sm:text-sm">Hubungi</a>
+                                        </div>
+                                        <div class="bg-slate-50 p-3 rounded-lg flex items-center justify-between">
+                                            <div>
+                                                <p class="font-semibold text-slate-800">Ust. Muhammad Zhafir Setiaji</p>
+                                                <p class="text-xs text-slate-500">Musyrif Kelas 2CDGH (Tahfizh)</p>
+                                            </div>
+                                            <a href="https://wa.me/6287717412804" target="_blank" class="btn btn-whatsapp text-white font-bold py-2 px-3 rounded-full text-xs sm:text-sm">Hubungi</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="border-slate-200/80">
+                                <div class="step">
+                                    <h4 class="font-semibold text-blue-600 mb-4 text-base sm:text-lg">B. Izin Terlambat Kembali Pasca Perpulangan (&lt; 24 jam)</h4>
+                                    <p class="mb-4 text-slate-600 text-sm sm:text-base">Wali santri <strong>wajib mengisi surat permohonan</strong> dan mengirimkannya ke Koordinator Musyrif Asrama 1.</p>
+                                    <div class="flex flex-wrap gap-4">
+                                       <a href="https://docs.google.com/document/d/1pDJLZe5SrC2-Djql9Sw_pU-z3Nnpfx5KgNwqaMkIKNw/edit?usp=sharing" target="_blank" class="btn btn-doc text-white font-bold py-2 px-4 rounded-full text-xs sm:text-sm">📄 Format Surat</a>
+                                       <a href="https://wa.me/6285339213109" target="_blank" class="btn btn-whatsapp text-white font-bold py-2 px-4 rounded-full text-xs sm:text-sm">Koord. Musyrif: Ust. Andi Aqillah Fadia H.</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 2: Izin Menginap -->
+                    <div class="card overflow-hidden animate-on-scroll">
+                        <button id="accordion-btn-2" class="accordion-button w-full text-left p-4 sm:p-6 flex justify-between items-center" aria-expanded="false" aria-controls="accordion-content-2">
+                            <span class="font-semibold text-base sm:text-lg flex items-center gap-4"><span class="text-2xl sm:text-3xl" role="img" aria-label="Ikon Bulan">🌙</span> Izin Menginap (1-3 Hari)</span>
+                            <span class="icon-container text-teal-500"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img"><title>Buka/Tutup</title><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></span>
+                        </button>
+                        <div id="accordion-content-2" class="accordion-content" role="region" aria-labelledby="accordion-btn-2">
+                           <div class="accordion-content-inner space-y-8">
+                                <div class="step">
+                                    <h4 class="font-semibold text-green-600 mb-4 text-base sm:text-lg">A. Izin Menginap 1 Malam</h4>
+                                    <p class="mb-4 text-slate-600 text-sm sm:text-base">Wali santri mengajukan izin via <strong>pesan singkat (WhatsApp)</strong> ke Pamong Asrama.</p>
+                                     <div class="bg-slate-50 p-3 rounded-lg flex items-center justify-between">
+                                        <div>
+                                            <p class="font-semibold text-slate-800">Ust. Muhammad Ahnaf Lubab</p>
+                                            <p class="text-xs text-slate-500">Pamong Asrama 1</p>
+                                        </div>
+                                        <a href="https://wa.me/6282145575016" target="_blank" class="btn btn-whatsapp text-white font-bold py-2 px-3 rounded-full text-xs sm:text-sm">Hubungi</a>
+                                    </div>
+                                </div>
+                                <hr class="border-slate-200/80">
+                                <div class="step">
+                                    <h4 class="font-semibold text-green-600 mb-4 text-base sm:text-lg">B. Izin Menginap 2-3 Hari</h4>
+                                    <p class="mb-4 text-slate-600 text-sm sm:text-base">Wali santri <strong>wajib mengisi surat permohonan</strong> dan mengirimkannya ke Pamong Asrama.</p>
+                                    <div class="flex flex-wrap gap-4">
+                                        <a href="https://docs.google.com/document/d/1oQtCWzwcrBeHEeM6h3CKhEYX3dFNr5ZzzAGb3zoQFMc/edit?usp=sharing" target="_blank" class="btn btn-doc text-white font-bold py-2 px-4 rounded-full text-xs sm:text-sm">📄 Format Surat</a>
+                                        <a href="https://wa.me/6282145575016" target="_blank" class="btn btn-whatsapp text-white font-bold py-2 px-4 rounded-full text-xs sm:text-sm">Pamong: Ust. M. Ahnaf Lubab</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 3: Izin Khusus -->
+                    <div class="card overflow-hidden animate-on-scroll">
+                        <button id="accordion-btn-3" class="accordion-button w-full text-left p-4 sm:p-6 flex justify-between items-center" aria-expanded="false" aria-controls="accordion-content-3">
+                            <span class="font-semibold text-base sm:text-lg flex items-center gap-4"><span class="text-2xl sm:text-3xl" role="img" aria-label="Ikon Pesawat">✈️</span> Izin Khusus (> 3 Hari / Cuti Sakit)</span>
+                            <span class="icon-container text-teal-500"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img"><title>Buka/Tutup</title><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></span>
+                        </button>
+                        <div id="accordion-content-3" class="accordion-content" role="region" aria-labelledby="accordion-btn-3">
+                            <div class="accordion-content-inner space-y-8">
+                                <div class="step">
+                                    <h4 class="font-semibold text-red-600 mb-4 text-base sm:text-lg">Langkah 1: Siapkan Surat Permohonan</h4>
+                                    <p class="mb-4 text-slate-600 text-sm sm:text-base">Untuk acara keluarga lebih dari 3 hari atau cuti sakit, wali santri membuat <strong>surat permohonan resmi</strong> yang ditujukan kepada <strong>Direktur Madrasah</strong>.</p>
+                                    <div class="flex flex-wrap items-center gap-4">
+                                        <a href="https://docs.google.com/document/d/1dbbqi0mpVuBX3VPmcHOoKsvx22uDy6Oo92PswLTYFDo/edit?usp=sharing" target="_blank" class="btn btn-doc text-white font-bold py-2 px-4 rounded-full text-xs sm:text-sm">📄 Unduh Format Surat</a>
+                                    </div>
+                                </div>
+                                <hr class="border-slate-200/80">
+                                <div class="step">
+                                    <h4 class="font-semibold text-red-600 mb-3 text-base sm:text-lg">Langkah 2: Kirim Surat</h4>
+                                    <p class="mb-4 text-slate-600 text-sm sm:text-base">Surat dapat dikirimkan melalui <strong>Email</strong> atau diserahkan dalam bentuk <strong>Fisik (Hard Copy)</strong>.</p>
+                                    <div class="p-4 bg-slate-50/80 rounded-lg border border-slate-200 space-y-4">
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-xs sm:text-sm font-medium text-slate-700"><strong>Email:</strong> humas@muallimin.sch.id</span>
+                                            <button onclick="copyEmail(this)" aria-label="Salin alamat email" class="p-1.5 rounded-md hover:bg-slate-200 transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard text-slate-500" viewBox="0 0 16 16" role="img"><title>Salin</title><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>
+                                            </button>
+                                        </div>
+                                        <hr class="border-slate-200/80">
+                                        <div>
+                                            <p class="font-semibold text-slate-800"><strong>Alamat Fisik:</strong></p>
+                                            <p class="text-slate-600 text-sm sm:text-base mt-1">Madrasah Mu'allimin Muhammadiyah Yogyakarta<br>Jl. Letjen S.Parman No.68, Wirobrajan, Kota Yogyakarta, DIY 55252.</p>
+                                            <a href="https://maps.app.goo.gl/PKobJLu6FH3eb3H36" target="_blank" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                                                Lihat di Google Maps
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 md:mt-20 pt-8 md:pt-10 border-t border-slate-200/80">
+            <p class="text-slate-500 text-sm">&copy; 2025 Didesain oleh fadiahaswat</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyEmail(button) {
+            const emailText = 'humas@muallimin.sch.id';
+            const textArea = document.createElement("textarea");
+            textArea.value = emailText; document.body.appendChild(textArea); textArea.select();
+            try {
+                document.execCommand('copy');
+                const originalContent = button.innerHTML;
+                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg text-green-500" viewBox="0 0 16 16"><title>Tersalin</title><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022z"/></svg>`;
+                button.disabled = true;
+                setTimeout(() => { button.innerHTML = originalContent; button.disabled = false; }, 2000);
+            } catch (err) { console.error('Gagal menyalin email: ', err); }
+            document.body.removeChild(textArea);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scroll for hero button
+            const scrollButton = document.getElementById('scroll-to-procedures');
+            const mainContent = document.getElementById('main-content');
+            if(scrollButton && mainContent) {
+                scrollButton.addEventListener('click', () => {
+                    mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+
+            // Staggered animation logic
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`; // Faster stagger
+                observer.observe(el);
+            });
+
+            // Accordion Logic
+            const accordionContainer = document.getElementById('accordion-container');
+            if (accordionContainer) {
+                // This logic replaces the need to inject HTML via JS
+                accordionContainer.addEventListener('click', function (event) {
+                    const button = event.target.closest('.accordion-button');
+                    if (button) {
+                        const isAlreadyActive = button.classList.contains('active');
+                        // Close all accordions
+                        accordionContainer.querySelectorAll('.accordion-button').forEach(btn => {
+                            btn.classList.remove('active');
+                            btn.setAttribute('aria-expanded', 'false');
+                        });
+                        // If it wasn't active, open it
+                        if (!isAlreadyActive) {
+                            button.classList.add('active');
+                            button.setAttribute('aria-expanded', 'true');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
